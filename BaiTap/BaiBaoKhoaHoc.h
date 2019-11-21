@@ -12,12 +12,13 @@ private:
 	int soXuatBan;
 	int namXuatBan;
 	string nhaXuatBan;
-	string *tacGiaChinh;
-	string *dongTacGia;
+	string tacGiaChinh;
+	string dongTacGia;
 
 public:
 	BaiBaoKhoaHoc();
-	BaiBaoKhoaHoc(string, string, string, string, int, int, string, string *, string*);
+	BaiBaoKhoaHoc(string, string, string, string, int, int, string, string , string);
+	BaiBaoKhoaHoc(BaiBaoKhoaHoc &b);
 	BaiBaoKhoaHoc input();
 	void output();
 	string getMaBaiBao();
@@ -34,10 +35,10 @@ public:
 	void setNamXuatBan(int namXuatBan);
 	string getNhaXuatBan();
 	void setNhaXuatBan(string nhaXuatBan);
-	string *getTacGiaChinh();
-	void setTacGiaChinh(string *tacGiaChinh);
-	string *getDongTacGia();
-	void setDongTacGia(string *dongTacGia);
+	string getTacGiaChinh();
+	void setTacGiaChinh(string tacGiaChinh);
+	string getDongTacGia();
+	void setDongTacGia(string dongTacGia);
 	void show();
 
 	~BaiBaoKhoaHoc();

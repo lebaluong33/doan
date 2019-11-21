@@ -6,11 +6,10 @@ class Node
 public:
 	Node* next;
 	Node* prev;
-	BaiBaoKhoaHoc *baiBaoKhoaHoc;
+	BaiBaoKhoaHoc BaiBaoKhoaHoc;
 public:
 
-	Node(BaiBaoKhoaHoc *baiBaoKhoaHoc= NULL, Node*next=NULL, Node*prev= NULL);
-	void input_node();
+	Node();
 	~Node();
 };
 
