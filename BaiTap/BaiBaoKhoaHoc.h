@@ -19,8 +19,21 @@ public:
 	BaiBaoKhoaHoc();
 	BaiBaoKhoaHoc(string, string, string, string, int, int, string, string , string);
 	BaiBaoKhoaHoc(BaiBaoKhoaHoc &b);
-	BaiBaoKhoaHoc input();
-	void output();
+	void input();
+	void inputMaBaiBao();
+	void inputTenBaiBao();
+	void inputTenTapChi();
+	void inputLoaiTapChi();
+	void inputSoXuatBan();
+	void inputNamXuatBan();
+	void inputNhaXuatBan();
+	void inputTacGiaChinh();
+	void inputDongtacGia();
+	void show(int);
+
+
+
+
 	string getMaBaiBao();
 	void setMaBaiBao(string maBaiBao);
 	string getTenBaiBao();
@@ -39,7 +52,6 @@ public:
 	void setTacGiaChinh(string tacGiaChinh);
 	string getDongTacGia();
 	void setDongTacGia(string dongTacGia);
-	void show();
 
 	~BaiBaoKhoaHoc();
 };
