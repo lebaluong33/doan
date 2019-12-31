@@ -41,6 +41,8 @@ void menu35( string type="") {
 	string tabs = "\t\t\t\t\t\t\t\t\t\t";
 	cout << "\n" << tabs << "-----------------------------------\n"
 		<< tabs << " ___________________________________________________\n"
+		<< tabs << "|                        MENU                       |\n"
+		<< tabs << "|___________________________________________________|\n"
 		<< tabs << "| 1. |" << setw(5)<< type << " Vao Dau Danh Sach                       |\n"
 		<< tabs << "| 2. |" << setw(5) << type << " Vao Vi Tri Nao Do                       |\n"
 		<< tabs << "| 3. |" << setw(5) << type << " Vao Cuoi Danh Sach                      |\n"
@@ -54,6 +56,8 @@ void menu4() {
 	string tabs = "\t\t\t\t\t\t\t\t\t\t";
 	cout << "\n" << tabs << "-----------------------------------\n"
 		<< tabs << " ___________________________________________________\n"
+		<< tabs << "|                        MENU                       |\n"
+		<< tabs << "|___________________________________________________|\n"
 		<< tabs << "| 1. |  Chinh Sua Ma Bai Bao                        |\n"
 		<< tabs << "| 2. |  Chinh Sua Ten Bai bao                       |\n"
 		<< tabs << "| 3. |  Chinh Sua Ten Tap Chi                       |\n"
@@ -71,6 +75,8 @@ void menu8() {
 	string tabs = "\t\t\t\t\t\t\t\t\t\t";
 	cout << "\n" <<tabs << "-----------------------------------\n"
 		<< tabs << " ___________________________________________________\n"
+		<< tabs << "|                        MENU                       |\n"
+		<< tabs << "|___________________________________________________|\n"
 		<< tabs << "| 1. |  Sap Xep Theo Theo Nam Xuat Ban              |\n"
 	    << tabs << "| 2. |  Sap Xep Theo Theo Ten Bai Bao               |\n"
 		<< tabs << "| 0. |  Ve Menu Chinh                               |\n"
@@ -582,7 +588,7 @@ void List::filter()
 
 void List::exportToFile()
 {
-	fstream fileOutput("../text.txt");
+	fstream fileOutput("./text.txt");
 	if (fileOutput.fail()) {
 		cout << "Mo file loi";
 		return;
