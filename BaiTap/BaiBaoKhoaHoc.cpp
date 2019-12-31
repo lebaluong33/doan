@@ -8,10 +8,12 @@ void validateStr(string type, string &content ) {
 	} while (content == "");
 }
 void validateInt(string type, int& content) {
-	do {
 		cout << "\tNhap " << type << " :";
-		cin >> content;
-	} while (!content);
+		while (!(cin >> content) || content <= 0) {
+			cout << "\tNhap " << type << " :";
+			cin.clear();
+			cin.ignore(123, '\n');
+		};
 }
 BaiBaoKhoaHoc::BaiBaoKhoaHoc()
 {
@@ -72,62 +74,7 @@ void BaiBaoKhoaHoc::input()
 	this->inputNhaXuatBan();
 	this->inputTacGiaChinh();
 	this->inputDongtacGia();
-	/*do{
-	cout << "\tNhap ma bai bao:";
-	getline(cin,this->maBaiBao);
-	} while (this->maBaiBao == "");
-	do {
-		cout << "\tNhap ten bai bao:";
-		getline(cin, this->tenBaiBao);
-	} while (this->tenBaiBao == "");
-	do {
-		cout << "\tNhap ten tap chi:";
-		getline(cin,this->tenTapChi);
-	} while (this->tenTapChi == "");
-	int num=0;
-	do {
-		cout << "\tNhap loai tap chi (number 1->5):1.SCI, 2.SCIE, 3.ISI, 4.SCOPUS, 5. Tap Chi Khac :";
-		cin >> num;
-	} while (num <1 || num >5 );
-	switch (num) {
-	case 1: 
-		this->loaiTapChi = "SCI";
-		break;
-	case 2:
-		this->loaiTapChi = "SCIE";
-		break;
-	case 3:
-		this->loaiTapChi = "ISI";
-		break;
-	case 4:
-		this->loaiTapChi = "SCOPUS";
-		break;
-	default:
-		this->loaiTapChi = "Tap Chi Khac";
-		break;
-	}
-	do {
-		cout << "\tNhap so xuat ban:";
-		cin >> this->soXuatBan;
-	} while (!this->soXuatBan);
-	do {
-		cout << "\tNhap nam xuat ban:";
-		cin >> this->namXuatBan;
-	} while (!this->namXuatBan);
-	cin.ignore();
-	do {
-		cout << "\tNhap nha xuat ban:";
-		getline(cin, this->nhaXuatBan);
-	} while (this->nhaXuatBan == "");
-	do {
-		cout << "\tNhap tac gia chinh:";
-		getline(cin, this->tacGiaChinh);
-	} while (this->tacGiaChinh == "");
-	cout << "\tNhap dong tac gia:";
-	getline(cin, this->dongTacGia);
-	if (this->dongTacGia == ""); this->dongTacGia == " ";*/
 }
-
 void BaiBaoKhoaHoc::inputMaBaiBao()
 {
 	validateStr("Ma Bai Bao", this->maBaiBao);
@@ -148,7 +95,7 @@ void BaiBaoKhoaHoc::inputLoaiTapChi()
 	int num = 0;
 	do {
 		cout << "\tNhap loai tap chi (number 1->5):1.SCI, 2.SCIE, 3.ISI, 4.SCOPUS, 5. Tap Chi Khac :";
-		cin >> num;
+		validateInt("loai tap chi",num);
 	} while (num < 1 || num >5);
 	switch (num) {
 	case 1:

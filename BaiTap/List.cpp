@@ -100,11 +100,13 @@ Node* List::new_node(BaiBaoKhoaHoc& b)
 }
 
 void List::import() {
-	ifstream fileInput("../text.txt");
+	ifstream fileInput("./text.txt");
 	if (fileInput.fail()) {
 		cout << "\t\t\t\t\t\t\t\t\t\tMO FILE LOI\n";
 	}
 	else {
+		this->head = NULL;
+		this->tail = NULL;
 		while (!fileInput.eof())
 		{
 			BaiBaoKhoaHoc temp;
@@ -148,13 +150,19 @@ void List::import() {
 	}
 	fileInput.close();
 }
-
+void validateInt(int& content) {
+	cout << "\t\t\t\t\t\t\t\t\t\tMOI BAN CHON CHUC NANG :";
+	while (!(cin >> content || content <= 0)) {
+		cout << "\t\t\t\t\t\t\t\t\t\tMOI BAN CHON CHUC NANG :";
+		cin.clear();
+		cin.ignore(123, '\n');
+	};
+}
 int inputSelect(int start, int end) {
 	int select;
 	do {
-		cout << "\t\t\t\t\t\t\t\t\t\t\t----------************----------\n"
-			<<"\t\t\t\t\t\t\t\t\t\tMOI BAN CHON CHUC NANG :";
-		cin >> select;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t----------************----------\n";
+		validateInt(select);
 		if (select < start || select >end) cout << "\t\t\t\t\t\t\t\t\t\t----------*******----------\n"
 			<<"\t\t\t\t\t\t\t\t\t\tLUA CHON KHONG DUNG!!\n";
 	} while (select < start || select >end);
@@ -208,7 +216,6 @@ void List::select(int num=1) {
 	}
 	case 4: {
 		this->editPosition();
-		cout << "\t\t\t\t\t\t\t\t\t\tDA CHINH SUA!\n";
 		select();
 		break;
 	}
@@ -217,7 +224,6 @@ void List::select(int num=1) {
 		switch (inputSelect(0, 3)) {
 		case 1:
 			this->removeFirst();
-			cout << "\t\t\t\t\t\t\t\t\t\tDA XOA VI TRI DAU!\n";
 			select();
 			break;
 		case 2:
@@ -226,7 +232,6 @@ void List::select(int num=1) {
 			break;
 		case 3:
 			this->removeLast();
-			cout << "\t\t\t\t\t\t\t\t\t\tDA XOA VI TRI CUOI!\n";
 			select();
 			break;
 		case 0: 
@@ -389,106 +394,126 @@ void List::insertFirst()
 void List::removePosition()
 {
 	int pos,i=1, L = (*this).length();
-	do {
-		cout << "Nhap vi tri can xoa (1->"<<L<< ") : ";
-		cin >> pos;
-		if (pos < 1 || pos > L) cout << "Vi can xoa khong hop le!!!" << endl;
-	} while (pos < 1 || pos > L);
-	Node *PH = this->head, * PT;
-	if (pos == 1) (*this).removeFirst();
-	else
-		if (pos == L) (*this).removeLast();
-		else {
-			while (PH != NULL && i != pos - 1) //duyet den vi tri k-1
-			{
-				i++;
-				PH = PH->next;
+	if (L == 0) cout << "\t\t\t\t\t\t\t\t\t\tKhong the xoa vi danh sach trong!\n";
+	else {
+		do {
+			cout << "Nhap vi tri can xoa (1->"<<L<< ") : ";
+			cin >> pos;
+			if (pos < 1 || pos > L) cout << "Vi can xoa khong hop le!!!" << endl;
+		} while (pos < 1 || pos > L);
+		Node *PH = this->head, * PT;
+		if (pos == 1)(*this).removeFirst();	
+		else
+			if (pos == L)(*this).removeLast();
+			else {
+				while (PH != NULL && i != pos - 1) //duyet den vi tri k-1
+				{
+					i++;
+					PH = PH->next;
+				}
+				PT = PH->next->next; //xac dinh vi tri k+1
+				PH->next = PT;
+				PT->prev = PH;
+				cout << "\t\t\t\t\t\t\t\t\t\tDA XOA VI TRI " << pos << " !\n";
 			}
-			PT = PH->next->next; //xac dinh vi tri k+1
-			PH->next = PT;
-			PT->prev = PH;
-		}
-	cout << "\t\t\t\t\t\t\t\t\t\tDA XOA VI TRI "<<pos<<" !\n";
+	}
+	return;
 }
 
 void List::removeFirst()
 {
-	if (!Isempty(*(this)))
-	{
+	if (Isempty(*(this))) cout << "\t\t\t\t\t\t\t\t\t\tKhong the xoa vi danh sach trong!\n";
+	else {
 		this->head = this->head->next;
+		cout << "\t\t\t\t\t\t\t\t\t\tDA XOA VI TRI DAU!\n";
 	}
 }
 
 void List::removeLast()
 {
-	if (!Isempty(*(this)))
-	{
+	if (Isempty(*(this))) cout << "\t\t\t\t\t\t\t\t\t\tKhong the xoa vi danh sach trong!\n";
+	else {
 		this->tail = this->tail->prev;
 		this->tail->next = NULL;
+		cout << "\t\t\t\t\t\t\t\t\t\tDA XOA VI TRI CUOI!\n";
 	}
 }
 
 void List::editPosition()
 {
 	int pos, i = 1, L = (*this).length();
-	do {
-		cout << "\tNhap Vi Tri Can Chinh Sua (1->" << L << ") : ";
-		cin >> pos;
-		if (pos < 1 || pos > L) cout << "\tVi Tri Can Chinh Sua Khong Hop Le!!!" << endl;
-	} while (pos < 1 || pos > L);
-	Node* PH = this->head;
-	while (PH != NULL && i != pos)
-	{
-		i++;
-		PH = PH->next;
-	}
-	ketqua();
-	(*PH).BaiBaoKhoaHoc.show(i);
-	menu4();
-	switch (inputSelect(0, 10)) {
-	case 1:
-		cin.ignore();
-		PH->BaiBaoKhoaHoc.inputMaBaiBao();
-		break;
-	case 2:
-		cin.ignore();
-		PH->BaiBaoKhoaHoc.inputTenBaiBao();
-		break;
-	case 3:
-		cin.ignore();
-		PH->BaiBaoKhoaHoc.inputTenTapChi();
-		break;
-	case 4:
-		cin.ignore();
-		PH->BaiBaoKhoaHoc.inputLoaiTapChi();
-		break;
-	case 5:
-		PH->BaiBaoKhoaHoc.inputSoXuatBan();
-		break;
-	case 6:
-		PH->BaiBaoKhoaHoc.inputNamXuatBan();
-		break;
-	case 7:
-		cin.ignore();
-		PH->BaiBaoKhoaHoc.inputNhaXuatBan();
-		break;
-	case 8:
-		cin.ignore();
-		PH->BaiBaoKhoaHoc.inputTacGiaChinh();
-		break;
-	case 9:
-		cin.ignore();
-		PH->BaiBaoKhoaHoc.inputDongtacGia();
-		break;
-	case 10:
-		cin.ignore();
-		PH->BaiBaoKhoaHoc.input();
-		break;
-	case 0:
-	default:
-		select();
-		break;
-	}
+	if (L != 0){
+		do {
+			cout << "\tNhap Vi Tri Can Chinh Sua (1->" << L << ") : ";
+			cin >> pos;
+			if (pos < 1 || pos > L) cout << "\tVi Tri Can Chinh Sua Khong Hop Le!!!" << endl;
+		} while (pos < 1 || pos > L);
+		Node* PH = this->head;
+		while (PH != NULL && i != pos)
+		{
+			i++;
+			PH = PH->next;
+		}
+		ketqua();
+		(*PH).BaiBaoKhoaHoc.show(i);
+		menu4();
+		switch (inputSelect(0, 10)) {
+		case 1:
+			cin.ignore();
+			PH->BaiBaoKhoaHoc.inputMaBaiBao();
+			cout << "\t\t\t\t\t\t\t\t\t\tDA CHINH SUA!\n";
+			break;
+		case 2:
+			cin.ignore();
+			PH->BaiBaoKhoaHoc.inputTenBaiBao();
+			cout << "\t\t\t\t\t\t\t\t\t\tDA CHINH SUA!\n";
+			break;
+		case 3:
+			cin.ignore();
+			PH->BaiBaoKhoaHoc.inputTenTapChi();
+			cout << "\t\t\t\t\t\t\t\t\t\tDA CHINH SUA!\n";
+			break;
+		case 4:
+			cin.ignore();
+			PH->BaiBaoKhoaHoc.inputLoaiTapChi();
+			cout << "\t\t\t\t\t\t\t\t\t\tDA CHINH SUA!\n";
+			break;
+		case 5:
+			PH->BaiBaoKhoaHoc.inputSoXuatBan();
+			cout << "\t\t\t\t\t\t\t\t\t\tDA CHINH SUA!\n";
+			break;
+		case 6:
+			PH->BaiBaoKhoaHoc.inputNamXuatBan();
+			cout << "\t\t\t\t\t\t\t\t\t\tDA CHINH SUA!\n";
+			break;
+		case 7:
+			cin.ignore();
+			PH->BaiBaoKhoaHoc.inputNhaXuatBan();
+			cout << "\t\t\t\t\t\t\t\t\t\tDA CHINH SUA!\n";
+			break;
+		case 8:
+			cin.ignore();
+			PH->BaiBaoKhoaHoc.inputTacGiaChinh();
+			cout << "\t\t\t\t\t\t\t\t\t\tDA CHINH SUA!\n";
+			break;
+		case 9:
+			cin.ignore();
+			PH->BaiBaoKhoaHoc.inputDongtacGia();
+			cout << "\t\t\t\t\t\t\t\t\t\tDA CHINH SUA!\n";
+			break;
+		case 10:
+			cin.ignore();
+			PH->BaiBaoKhoaHoc.input();
+			cout << "\t\t\t\t\t\t\t\t\t\tDA CHINH SUA!\n";
+			break;
+		case 0:
+		default:
+			select();
+			return;
+			break;
+		}
+	} else cout << "\t\t\t\t\t\t\t\t\t\tKhong the chinh sua vi danh sach trong!\n";
+	return;
 }
 
 void List::search()
