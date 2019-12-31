@@ -12,8 +12,8 @@ void gioiThieu () {
 	cout << tabs << "|_______________________________________________________________|\n";
 	cout << tabs << "|" << setw(40) << "GVHD : NGUYEN THI MINH HY" << "                       |\n";
 	cout << tabs << "|_______________________________________________________________|\n";
-	cout << tabs << "|" << setw(40) << "SVTH 1 : LE BA LUONG - 17T1 - 102170034 " << "                       |\n";
-	cout << tabs << "|" << setw(40) << "SVTH 2 : NGUYEN THI HONG - 17T1 - 102160078" << "                    |\n";
+	cout << tabs << "|" << setw(40) << "SVTH 1 : LE BA LUONG     - 17T1 - 102170034 " << "                   |\n";
+	cout << tabs << "|" << setw(40) << "SVTH 2 : NGUYEN THI HONG - 17T1 - 102170021" << "                    |\n";
 	cout << tabs << "|" << setw(32) << "NHOM HP : 17N11B" << "                               |\n";
 	cout << tabs << "|_______________________________________________________________|\n";
 }
@@ -296,6 +296,7 @@ List::List()
 {
 	this->head = NULL;
 	this->tail = NULL;
+	this->isImported = false;
 }
 
 int List::Isempty(List L) //kiem tra DS rong

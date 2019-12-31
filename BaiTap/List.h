@@ -7,7 +7,7 @@ class List
 private:
 	Node *head;
 	Node *tail;
-	bool isImported = false;
+	bool isImported;
 public:
 	List();
 	void select(int);
